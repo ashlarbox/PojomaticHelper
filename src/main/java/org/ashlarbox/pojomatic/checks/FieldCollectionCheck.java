@@ -6,7 +6,7 @@ import java.util.Set;
 import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
 import static org.apache.commons.lang.StringUtils.join;
 
-public class FieldCollectionCheck {
+class FieldCollectionCheck {
 
     private MissingFieldsFinder missingFieldsFinder = new MissingFieldsFinder();
 

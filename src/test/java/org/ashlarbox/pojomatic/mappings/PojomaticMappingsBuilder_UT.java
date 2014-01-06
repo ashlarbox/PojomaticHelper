@@ -27,11 +27,11 @@ public class PojomaticMappingsBuilder_UT {
     private PojomaticMappingFieldsFinder pojomaticMappingFieldsFinder;
 
     @InjectMocks
-    private PojomaticMappingsBuilder pojomaticMappingsBuilder = new PojomaticMappingsBuilder();
+    private final PojomaticMappingsBuilder pojomaticMappingsBuilder = new PojomaticMappingsBuilder();
 
     private String testField = randomAlphanumeric(12);
 
-    private PojomaticObject pojomaticObject = mock(PojomaticObject.class);
+    private final PojomaticObject pojomaticObject = mock(PojomaticObject.class);
     private Field expectedField;
 
     @Before

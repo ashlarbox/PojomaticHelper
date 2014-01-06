@@ -30,7 +30,7 @@ public class PojomaticMapper_UT {
     private PropertyRoleFunctionRetriever propertyRoleFunctionRetriever;
 
     @InjectMocks
-    private PojomaticMapper pojomaticMapper = new PojomaticMapper();
+    private final PojomaticMapper pojomaticMapper = new PojomaticMapper();
 
     @Property(policy = PojomaticPolicy.EQUALS)
     private String test = randomAlphabetic(4);

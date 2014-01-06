@@ -10,7 +10,7 @@ import java.util.Map;
 
 import static com.google.common.collect.Maps.newHashMap;
 
-public class PropertyRoleFunctionRetriever {
+class PropertyRoleFunctionRetriever {
 
     private static Map<PropertyRole, PojomaticMappingFunction> PROPERTY_ROLE_FUNCTION = newHashMap();
 

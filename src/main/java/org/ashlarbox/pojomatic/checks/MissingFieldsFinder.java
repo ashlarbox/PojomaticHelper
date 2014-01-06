@@ -8,7 +8,7 @@ import java.util.Set;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.newArrayList;
 
-public class MissingFieldsFinder {
+class MissingFieldsFinder {
 
     public List<String> find(Set<String> checkFields, Set<String> verifySet) {
         return newArrayList(filter(checkFields, checkPredicate(verifySet)));
@@ -18,7 +18,7 @@ public class MissingFieldsFinder {
         return new Predicate<String>() {
             @Override
             public boolean apply(String s) {
-                return (verifySet.contains(s) == false);
+                return (!(verifySet.contains(s)));
             }
         };
     }

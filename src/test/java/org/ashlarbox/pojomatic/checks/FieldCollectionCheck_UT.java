@@ -29,7 +29,7 @@ public class FieldCollectionCheck_UT {
     private MissingFieldsFinder missingFieldsFinder;
 
     @InjectMocks
-    private FieldCollectionCheck fieldCollectionCheck = new FieldCollectionCheck();
+    private final FieldCollectionCheck fieldCollectionCheck = new FieldCollectionCheck();
 
     private final Set<String> expectedFields = newHashSet(MISSING_FIELD1, MATCHED_FIELD);
     private final Set<String> actualFields = newHashSet(MATCHED_FIELD);

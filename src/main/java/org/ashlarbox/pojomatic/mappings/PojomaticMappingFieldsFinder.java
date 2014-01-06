@@ -8,7 +8,7 @@ import java.util.List;
 import static com.google.common.collect.Iterables.filter;
 import static java.util.Arrays.asList;
 
-public class PojomaticMappingFieldsFinder {
+class PojomaticMappingFieldsFinder {
 
     private NotStaticOrFinalPredicate notStaticOrFinalPredicate = new NotStaticOrFinalPredicate();
 

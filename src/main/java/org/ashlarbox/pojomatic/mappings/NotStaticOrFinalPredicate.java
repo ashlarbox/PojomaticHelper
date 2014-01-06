@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import static java.lang.reflect.Modifier.isFinal;
 import static java.lang.reflect.Modifier.isStatic;
 
-public class NotStaticOrFinalPredicate implements Predicate<Field> {
+class NotStaticOrFinalPredicate implements Predicate<Field> {
 
     @Override
     public boolean apply(Field field) {

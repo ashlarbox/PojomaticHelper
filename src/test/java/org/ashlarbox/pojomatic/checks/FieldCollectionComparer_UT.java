@@ -21,7 +21,7 @@ public class FieldCollectionComparer_UT {
     private FieldCollectionCheck fieldCollectionCheck;
 
     @InjectMocks
-    private FieldCollectionComparer fieldCollectionComparer = new FieldCollectionComparer();
+    private final FieldCollectionComparer fieldCollectionComparer = new FieldCollectionComparer();
 
     @Test
     public void comparerShouldRunExpectedChecks() {

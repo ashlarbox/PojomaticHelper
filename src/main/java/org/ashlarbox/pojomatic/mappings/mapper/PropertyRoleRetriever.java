@@ -8,7 +8,7 @@ import org.pojomatic.internal.PropertyRole;
 
 import java.util.Set;
 
-public class PropertyRoleRetriever {
+class PropertyRoleRetriever {
 
     private DefaultPojomaticPolicy defaultPojomaticPolicy = DefaultPojomaticPolicy.NONE;
 
