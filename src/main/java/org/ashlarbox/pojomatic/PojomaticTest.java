@@ -6,7 +6,7 @@ public interface PojomaticTest {
 
     void runPojomaticTests();
 
-    PojomaticObject getPojomaticObject();
+    Class getTestClass();
 
     Set<String> getEqualsFields();
 

@@ -1,31 +1,35 @@
 package org.ashlarbox.pojomatic;
 
 import org.ashlarbox.pojomatic.checks.FieldCollectionComparer;
-import org.ashlarbox.pojomatic.mappings.PojomaticMappings;
-import org.ashlarbox.pojomatic.mappings.PojomaticMappingsBuilder;
+import org.ashlarbox.pojomatic.classproperties.ClassPropertiesRetriever;
+import org.pojomatic.internal.ClassProperties;
+import org.pojomatic.internal.PropertyRole;
 
 import java.util.List;
+import java.util.Set;
 
-public class PojomaticObjectTester {
+import static org.pojomatic.internal.ClassProperties.forClass;
 
-    private PojomaticMappingsBuilder pojomaticMappingsBuilder = new PojomaticMappingsBuilder();
+public class PojomaticObjectTester<T> {
+
     private FieldCollectionComparer fieldCollectionComparer = new FieldCollectionComparer();
+    private ClassPropertiesRetriever classPropertiesRetriever = new ClassPropertiesRetriever();
 
-    private PojomaticMappings pojomaticMappings;
 
     public void runTests(PojomaticTest pojomaticTest, List<String> errors) {
-        if (pojomaticTest.getPojomaticObject() != null) {
-            performTests(pojomaticTest, errors);
-        } else {
-            errors.add("PojomaticObject not defined to test");
-        }
+        performTests(pojomaticTest, errors);
     }
 
     private void performTests(PojomaticTest pojomaticTest, List<String> errors) {
-        pojomaticMappings = pojomaticMappingsBuilder.build(pojomaticTest.getPojomaticObject());
-        fieldCollectionComparer.compare(pojomaticTest.getEqualsFields(), pojomaticMappings.getEqualsFields(), "equals", errors);
-        fieldCollectionComparer.compare(pojomaticTest.getHashCodeFields(), pojomaticMappings.getHashCodeFields(), "hashCode", errors);
-        fieldCollectionComparer.compare(pojomaticTest.getToStringFields(), pojomaticMappings.getToStringFields(), "toString", errors);
+        ClassProperties classProperties = forClass(pojomaticTest.getTestClass());
+        Set<String> equalsFields = classPropertiesRetriever.retrieve(classProperties, PropertyRole.EQUALS);
+        fieldCollectionComparer.compare(pojomaticTest.getEqualsFields(), equalsFields, "equals", errors);
+
+        Set<String> hashCodeFields = classPropertiesRetriever.retrieve(classProperties, PropertyRole.HASH_CODE);
+        fieldCollectionComparer.compare(pojomaticTest.getHashCodeFields(), hashCodeFields, "hashCode", errors);
+
+        Set<String> toStringFields = classPropertiesRetriever.retrieve(classProperties, PropertyRole.TO_STRING);
+        fieldCollectionComparer.compare(pojomaticTest.getToStringFields(), toStringFields, "toString", errors);
     }
 
 }

@@ -25,6 +25,23 @@ To implement, simply extend PojomaticObject.
 
 You still need to define how the fields used by Pojomatic using `@AutoProperty` and `@Property` annotations.
 
+Optionally, you do not need to explicitly use PojomaticObject. However, to use the PojomaticTester, you need to include
+following code in your class.
+
+    '    @Override
+         public final boolean equals(Object o) {
+             return Pojomatic.equals(this, o);
+         }
+
+         @Override
+         public final int hashCode() {
+             return Pojomatic.hashCode(this);
+         }
+
+         @Override
+         public final String toString() {
+             return Pojomatic.toString(this);
+         }
 
 
 PojomaticTester
@@ -34,24 +51,31 @@ PojomaticTester allows you to define in unit tests the exact fields you expect t
 
     public class YourClass_UT extends PojomaticTester {
 
-        private PojomaticObject getPojomaticObject() {
-            return new YourClass();
+        @Override
+        public Class getTestClass() {
+            return YourClass.class;
+        }
 
-        private Set<String> getEqualsFields() {
+        @Override
+        public Set<String> getEqualsFields() {
             return newHashSet("id", "username", "name", "address", "password");
         }
 
-        private Set<String> getHashCodeFields() {
-            return newHashSet("id", "username");
+        @Override
+        public Set<String> getHashCodeFields() {
+            return newHashSet("username");
         }
 
-        Set<String> getToStringFields() {
+        @Override
+        public Set<String> getToStringFields() {
             return newHashSet("id", "username", "name", "address");
         }
+
     }
 
 Now that you have the fields mapped in a test, you can add the Pojomatic annotations to make the test pass.
 
+See both `YourPojomaticObject` and `YourObject` for examples.
 
 
 No Conflicts

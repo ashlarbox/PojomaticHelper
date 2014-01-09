@@ -2,20 +2,20 @@ package org.ashlarbox.pojomatic;
 
 import org.pojomatic.Pojomatic;
 
-public abstract class PojomaticObject {
+public class PojomaticObject {
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         return Pojomatic.equals(this, o);
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Pojomatic.hashCode(this);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return Pojomatic.toString(this);
     }
 
