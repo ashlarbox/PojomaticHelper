@@ -8,6 +8,36 @@
     <artifactId>pojomatic-helper</artifactId>
     <version>1.0</version>
 
+    <name>Pojomatic Helper</name>
+    <description>Utility to provide consistent implementation and TDD-testing of Pojomatic</description>
+    <packaging>jar</packaging>
+
+    <organization>
+        <name>AshlarBox Systems</name>
+        <url>http://ashlarbox.com</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>dmatlock</id>
+            <name>Duke Matlock</name>
+            <email>duke at ashlarbox.com</email>
+            <organization>AshlarBox Systems</organization>
+            <organizationUrl>http://ashlarbox.com</organizationUrl>
+            <roles>
+                <role>Project Lead</role>
+            </roles>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GNU General Public License (GPL) version 3.0</name>
+            <url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+        </license>
+    </licenses>
+
     <properties>
         <commons.collections.version>3.2.1</commons.collections.version>
         <commons.lang.version>2.4</commons.lang.version>
@@ -71,7 +101,6 @@
             <version>${powermock.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
 </project>
