@@ -75,7 +75,11 @@ PojomaticTester allows you to define in unit tests the exact fields you expect t
 
 Now that you have the fields mapped in a test, you can add the Pojomatic annotations to make the test pass.
 
-See both `YourPojomaticObject` and `YourObject` for examples.
+In addition, you can optionally choose to only implement parts of Pojomatic. This allows you to handle cases where you cannot implement toString(), but still want to implement equals() and hashCode().
+
+See classes in the `testobject` package for examples of how you can use PojomaticHelper.
+
+
 
 
 No Conflicts

@@ -22,15 +22,15 @@ import static org.apache.commons.lang.RandomStringUtils.randomAlphanumeric;
 import static org.apache.commons.lang.StringUtils.join;
 import static org.apache.commons.lang.math.RandomUtils.nextInt;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.verifyZeroInteractions;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Pojomatic.class)
-public abstract class PojomaticTester<T extends PojomaticObject> implements PojomaticTest {
+public abstract class PojomaticTester implements PojomaticTest {
 
     private final PojomaticObjectTester pojomaticObjectTester = new PojomaticObjectTester();
 
@@ -38,12 +38,18 @@ public abstract class PojomaticTester<T extends PojomaticObject> implements Pojo
 
     private List<String> errors;
 
+    private final int expectedHashCode = nextInt();
+    private final String expectedToString = randomAlphanumeric(14);
+
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void mockStatic() {
         PowerMockito.mockStatic(Pojomatic.class);
+        when(Pojomatic.equals(any(), any())).thenReturn(true);
+        when(Pojomatic.hashCode(any())).thenReturn(expectedHashCode);
+        when(Pojomatic.toString(any())).thenReturn(expectedToString);
     }
 
     @Before
@@ -86,16 +92,14 @@ public abstract class PojomaticTester<T extends PojomaticObject> implements Pojo
     @Test
     public void equalsShouldNotCallPojomaticEqualsWhenNotDefined() {
         if (isEmpty(getEqualsFields())) {
-            pojomaticObject.equals(this);
-            verifyZeroInteractions(Pojomatic.class);
+            boolean pojomaticCalled = pojomaticObject.equals(this);
+            assertThat(pojomaticCalled, is(false));
         }
     }
 
     @Test
     public void hashCodeShouldCallPojomaticHashCodeWhenDefined() {
         if (isNotEmpty(getHashCodeFields())) {
-            int expectedHashCode = nextInt();
-            when(Pojomatic.hashCode(any())).thenReturn(expectedHashCode);
             int hashCode = pojomaticObject.hashCode();
             assertThat(hashCode, is(expectedHashCode));
         }
@@ -104,26 +108,24 @@ public abstract class PojomaticTester<T extends PojomaticObject> implements Pojo
     @Test
     public void hashCodeShouldNotCallPojomaticHashCodeWhenNotDefined() {
         if (isEmpty(getHashCodeFields())) {
-            pojomaticObject.hashCode();
-            verifyZeroInteractions(Pojomatic.class);
+            int hashCode = pojomaticObject.hashCode();
+            assertThat(hashCode, is(not(expectedHashCode)));
         }
     }
 
     @Test
     public void toStringShouldCallPojomaticToStringWhenDefined() {
         if (isNotEmpty(getToStringFields())) {
-            String expectedString = randomAlphanumeric(14);
-            when(Pojomatic.toString(any())).thenReturn(expectedString);
             String string = pojomaticObject.toString();
-            assertThat(string, is(expectedString));
+            assertThat(string, is(expectedToString));
         }
     }
 
     @Test
     public void toStringShouldNotCallPojomaticToStringWhenNotDefined() {
         if (isEmpty(getToStringFields())) {
-            pojomaticObject.toString();
-            verifyZeroInteractions(Pojomatic.class);
+            String string = pojomaticObject.toString();
+            assertThat(string, is(not(expectedToString)));
         }
     }
 
