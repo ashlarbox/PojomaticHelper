@@ -1,4 +1,4 @@
-Pojomatic Helper
+Pojomatic Helper (version 2.0.1 - uses Pojomatic version 2.0.1 for Java 7)
 ================================
 
 This utility serves two purposes

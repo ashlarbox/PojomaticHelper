@@ -18,9 +18,9 @@ import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static org.apache.commons.collections.CollectionUtils.isEmpty;
 import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
-import static org.apache.commons.lang.RandomStringUtils.randomAlphanumeric;
-import static org.apache.commons.lang.StringUtils.join;
-import static org.apache.commons.lang.math.RandomUtils.nextInt;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static org.apache.commons.lang3.StringUtils.join;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
@@ -38,7 +38,7 @@ public abstract class PojomaticTester implements PojomaticTest {
 
     private List<String> errors;
 
-    private final int expectedHashCode = nextInt();
+    private final int expectedHashCode = nextInt(1, 12);
     private final String expectedToString = randomAlphanumeric(14);
 
     @Rule

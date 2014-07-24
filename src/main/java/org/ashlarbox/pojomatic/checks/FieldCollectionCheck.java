@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
-import static org.apache.commons.lang.StringUtils.join;
+import static org.apache.commons.lang3.StringUtils.join;
 
 class FieldCollectionCheck {
 

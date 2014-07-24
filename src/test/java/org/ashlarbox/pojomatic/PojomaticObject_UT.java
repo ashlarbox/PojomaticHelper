@@ -8,8 +8,8 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.apache.commons.lang.RandomStringUtils.randomAlphanumeric;
-import static org.apache.commons.lang.math.RandomUtils.nextInt;
+import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
+import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
@@ -38,7 +38,7 @@ public class PojomaticObject_UT {
 
     @Test
     public void hashCodeShouldCallPojomaticHashCode() {
-        int expectedHashCode = nextInt();
+        int expectedHashCode = nextInt(1, 12);
         when(Pojomatic.hashCode(any())).thenReturn(expectedHashCode);
 
         int hashCode = pojomaticObject.hashCode();
